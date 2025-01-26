@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Tab</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-left">
+                <h1>Topics</h1>
+            </div>
+            <div class="header-actions">
+                <button id="thingsToDoBtn" class="btn secondary">Things to Do</button>
+                <button id="exportDataBtn" class="btn secondary">Export Data</button>
+                <label for="importDataInput" class="btn secondary" style="cursor: pointer;">Import Data</label>
+                <input type="file" id="importDataInput" accept=".json" style="display: none;">
+                <button id="addTopicBtn" class="btn primary">Add Topic</button>
+            </div>
+        </header>
+
+        <div id="topicsContainer" class="topics-grid"></div>
+
+        <!-- Add Topic Dialog -->
+        <dialog id="addTopicDialog" class="modal">
+            <form id="addTopicForm">
+                <h2>Add New Topic</h2>
+                <div class="form-group">
+                    <label for="topicName">Topic Name</label>
+                    <input type="text" id="topicName" required>
+                </div>
+                <div class="form-group">
+                    <label for="topicColor">Topic Color</label>
+                    <input type="color" id="topicColor" value="#4A90E2">
+                </div>
+                <div class="button-group">
+                    <button type="button" class="btn secondary" onclick="document.getElementById('addTopicDialog').close()">Cancel</button>
+                    <button type="submit" class="btn primary">Add Topic</button>
+                </div>
+            </form>
+        </dialog>
+
+        <!-- Add Item Dialog -->
+        <dialog id="addItemDialog" class="modal">
+            <form id="addItemForm">
+                <h2>Add New Item</h2>
+                <input type="hidden" id="topicId">
+                <div class="form-group">
+                    <label for="itemName">Name</label>
+                    <input type="text" id="itemName" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemUrl">URL (Optional)</label>
+                    <input type="url" id="itemUrl">
+                </div>
+                <div class="form-group">
+                    <label for="itemDeadline">Deadline (Optional)</label>
+                    <input type="datetime-local" id="itemDeadline">
+                </div>
+                <div class="form-group">
+                    <label for="itemNotes">Notes (Optional)</label>
+                    <textarea id="itemNotes" rows="3"></textarea>
+                </div>
+                <div class="button-group">
+                    <button type="button" class="btn secondary" onclick="document.getElementById('addItemDialog').close()">Cancel</button>
+                    <button type="submit" class="btn primary">Add Item</button>
+                </div>
+            </form>
+        </dialog>
+
+        <!-- Things to Do Dialog -->
+        <dialog id="thingsToDoDialog" class="modal">
+            <h2>Things to Do</h2>
+            <div id="checkedItemsList" class="checked-items-list">
+                <!-- Checked items will be listed here -->
+            </div>
+            <div class="button-group">
+                <button type="button" class="btn secondary" onclick="document.getElementById('thingsToDoDialog').close()">Close</button>
+            </div>
+        </dialog>
+    </div>
+
+    <!-- Load StorageManager first -->
+    <script src="storage.js"></script>
+    <!-- Load TopicManager after StorageManager is available -->
+    <script src="newtab.js"></script>
+</body>
+</html>
